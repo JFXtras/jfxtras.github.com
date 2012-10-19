@@ -11,7 +11,7 @@
   </resources>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="Ensemble.jar" size="6505455" download="eager" />
+    <jar href="Ensemble.jar" size="7177147" download="eager" />
   </resources>
   <applet-desc  width="100" height="100" main-class="com.javafx.main.NoJavaFXFallback"  name="Ensemble" >
     <param name="requiredFXVersion" value="2.1+"/>
