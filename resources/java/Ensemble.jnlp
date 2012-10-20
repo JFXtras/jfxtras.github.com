@@ -17,5 +17,4 @@
     <param name="requiredFXVersion" value="2.1+"/>
   </applet>
   <jfx:javafx-desc  width="100" height="100" main-class="ensemble.Ensemble2"  name="Ensemble" />
-  <update check="background"/>
 </jnlp>
