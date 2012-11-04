@@ -10,11 +10,11 @@
     <jfx:javafx-runtime version="2.2+" href="http://javadl.sun.com/webapps/download/GetFile/javafx-latest/windows-i586/javafx2.jnlp"/>
   </resources>
   <resources>
-    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="Ensemble.jar" size="7177147" download="eager" />
+    <j2se version="1.7.0_09+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="Ensemble.jar" download="eager" />
   </resources>
-  <applet-desc  width="100" height="100" main-class="com.javafx.main.NoJavaFXFallback"  name="Ensemble" >
-    <param name="requiredFXVersion" value="2.1+"/>
+  <applet-desc width="100" height="100" main-class="com.javafx.main.NoJavaFXFallback" name="Ensemble" >
+    <param name="requiredFXVersion" value="2.2+"/>
   </applet>
-  <jfx:javafx-desc  width="100" height="100" main-class="ensemble.Ensemble2"  name="Ensemble" />
+  <jfx:javafx-desc width="100" height="100" main-class="ensemble.Ensemble2"  name="Ensemble" />
 </jnlp>
