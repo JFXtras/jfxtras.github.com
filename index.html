@@ -70,10 +70,12 @@
           <h1 id="project_title"><a href="https://github.com/JFXtras">JFXtras</a></h1>
           <h2 id="project_tagline">A set of high quality controls and add-ons for JavaFX.</h2>
 
+<!--		  
             <section id="downloads">
               <a class="zip_download_link" href="https://github.com/JFXtras/jfxtras/zipball/master">Download this project's sources as a .zip file</a>
               <a class="tar_download_link" href="https://github.com/JFXtras/jfxtras/tarball/master">Download this project's sources as a tar.gz file</a>
             </section>
+-->			
         </header>
     </div>
 
@@ -82,9 +84,7 @@
       <section id="main_content" class="inner">
         <h3>Welcome to the JFXtras Project.</h3>
 
-<p>The goal of JFXtras is to provide those pieces that developers often need in their day-to-day work, but that are currently missing from <a href="http://www.javafx.com">JavaFX</a>.  This project will also serve as a proving ground for controls that may some day make it into the official JavaFX distribution.</p>
-
-<p>JFXtras began life as a library of add-on components for JavaFX 1.x.  The original components were all written in the now defunct JavaFX Script language.  This current incarnation of the project is targeted at the Java-based JavaFX 2.x library and is a completely new code base.</p>
+<p>The goal of JFXtras is to provide those pieces that developers often need in their day-to-day work, but that are currently missing from <a href="http://www.javafx.com">JavaFX</a>.</p>
 
 <h3>JFXtras and JFXtras Labs</h3>
 
@@ -92,8 +92,17 @@
 
 <p>Once the JFXtras developers feel that a component has reached a mature state, it will be moved from Labs into the main JFXtras library.</p>
 
-<p>Currently <strong>all</strong> components are in Labs.</p>
-
+<p>The JFXtras library has been divide into smaller parts, mainly to prevent a single artifact to become fairly large (which is a problem for the Internet of Things development). 
+Currently JFXtras consists of the following parts:
+<ul>
+	<li><a href="doc/8.0/jfxtras-common/index.html" target="_blank">jfxtras-common</a> - containing basic classes, like the enhanced layouts, utility classes, etc.</li>
+	<li><a href="doc/8.0/jfxtras-fxml/index.html" target="_blank">jfxtras-fxml</a> - containing FXML related classes, most notably JFXtrasBuilderFactory which is used to easily add builders to the FXMLLoader.</li>
+	<li><a href="doc/8.0/jfxtras-controls/index.html" target="_blank">jfxtras-controls</a> - containing standard controls like several date and time picker versions (Calendar and the Java8 DateTime)</li>
+	<li><a href="doc/8.0/jfxtras-agenda/index.html" target="_blank">jfxtras-agenda</a> - containing a non standard control 'Agenda' (Google Calendar alike)|</li>
+	<li><a href="doc/8.0/jfxtras-window/index.html" target="_blank">jfxtras-window</a> - containing a non standard Window implementation</li>
+	<li><a href="doc/8.0labs/index.html" target="_blank">labs</a> - containing incubator classes</li>
+</ul>
+</p>
 <p>JFXtras and JFXtras Labs are licensed under the <a href="http://en.wikipedia.org/wiki/BSD_licenses">New BSD License</a></p>
 
 <h3>See It!</h3>
@@ -103,11 +112,11 @@
 	<a class="fancybox" href="images/gallery/DateTextField.png" data-fancybox-group="gallery" title="A date optional including time textfield supporting Calendar or Java 8 LocalDateTime with a picker popup"><img src="images/gallery/DateTextField_thumb.png" alt="" /></a>
 	<a class="fancybox" href="images/gallery/BigDecimalField.png" data-fancybox-group="gallery" title="A textfield holding a BigDecimal in multiple roles"><img src="images/gallery/BigDecimalField_thumb.png" alt="" /></a>
 	<a class="fancybox" href="images/gallery/ListSpinner.png" data-fancybox-group="gallery" title="A spinner to cycle through a list, possibly editable"><img src="images/gallery/ListSpinner_thumb.png" alt="" /></a>
-	<a class="fancybox" href="images/gallery/RadialMenu.png" data-fancybox-group="gallery" title="A circular menu with fold out submenus"><img src="images/gallery/RadialMenu_thumb.png" alt="" /></a>
-	<a class="fancybox" href="images/gallery/Magnifier.png" data-fancybox-group="gallery" title="A magnifier"><img src="images/gallery/Magnifier_thumb.png" alt="" /></a>
 	<a class="fancybox" href="images/gallery/GridPane.png" data-fancybox-group="gallery" title="Extended layouts using fluent API (HBox, VBox, GridPane)"><img src="images/gallery/GridPane_thumb.png" alt="" /></a>
 	<a class="fancybox" href="images/gallery/CalendarTimePicker.png" data-fancybox-group="gallery" title="A time picker supporting Calendar or Java 8 LocalTime"><img src="images/gallery/CalendarTimePicker_thumb.png" alt="" /></a>
-	<a class="fancybox" href="images/gallery/MatrixPanel.png" data-fancybox-group="gallery" title="LED alike panel"><img src="images/gallery/MatrixPanel_thumb.png" alt="" /></a>
+	<a class="fancybox" href="images/gallery/RadialMenu.png" data-fancybox-group="gallery" title="Labs: A circular menu with fold out submenus"><img src="images/gallery/RadialMenu_thumb.png" alt="" /></a>
+	<a class="fancybox" href="images/gallery/Magnifier.png" data-fancybox-group="gallery" title="Labs: A magnifier"><img src="images/gallery/Magnifier_thumb.png" alt="" /></a>
+	<a class="fancybox" href="images/gallery/MatrixPanel.png" data-fancybox-group="gallery" title="Labs: LED alike panel"><img src="images/gallery/MatrixPanel_thumb.png" alt="" /></a>
 </div>
  
 <h3>Try It!</h3>
@@ -134,28 +143,24 @@
   <tbody>
     <tr style="text-align: center">
       <td>org.jfxtras</td>
-      <td><a href="http://central.maven.org/maven2/org/jfxtras/jfxtras-labs/" target="_blank">jfxtras-labs</a></td>
-      <td>2.2-r5<br/>2.2-r4 is the last Java 6 based release, r5+ will use J7.</td>
+      <td>jfxtras-common<br/>jfxtras-fxml<br/>jfxtras-controls<br/>jfxtras-agenda<br/>jfxtras-window<br/>jfxtras-labs</td>
+      <td>8.0-r1-SNAPSHOT<br/>This is the Java(FX) 8 version<br/>(available in Sonatype's <a href="https://oss.sonatype.org/content/repositories/snapshots/org/jfxtras/" target="_blank">snapshot</a> repository)</td>
     </tr>
     <tr style="text-align: center">
       <td>org.jfxtras</td>
-      <td><a href="https://oss.sonatype.org/content/repositories/snapshots/org/jfxtras/jfxtras-labs/" target="_blank">jfxtras-labs</a></td>
-      <td>2.2-r6-SNAPSHOT<br/>(available in Sonatype's <a href="https://oss.sonatype.org/content/repositories/snapshots" target="_blank">snapshot</a> repository)
-	  <br/>The javadoc is available <a href="http://jfxtras.org/doc/2.2" target="_blank">here</a>
+      <td>jfxtras-labs</td>
+      <td>2.2-r6-SNAPSHOT<br/>(available in Sonatype's <a href="https://oss.sonatype.org/content/repositories/snapshots/org/jfxtras/jfxtras-labs/" target="_blank">snapshot</a> repository)
+	  <br/>The javadoc is available <a href="doc/2.2/index.html" target="_blank">here</a>
 	  </td>
     </tr>
     <tr style="text-align: center">
       <td>org.jfxtras</td>
-      <td><a href="https://oss.sonatype.org/content/repositories/snapshots/org/jfxtras/jfxtras-labs/" target="_blank">jfxtras-labs</a></td>
-      <td>8.0-r1-SNAPSHOT<br/>This is the Java(FX) 8 port.<br/>(available in Sonatype's <a href="https://oss.sonatype.org/content/repositories/snapshots" target="_blank">snapshot</a> repository)
-	  <br/>The javadoc is available <a href="http://jfxtras.org/doc/8.0" target="_blank">here</a>
-	  </td>
+      <td>jfxtras-labs</td>
+      <td>2.2-r5<br/>2.2-r4 is the last Java 6 based release, r5+ will use J7.<br/>(available in <a href="http://central.maven.org/maven2/org/jfxtras/jfxtras-labs/" target="_blank">Maven central</a>)
+	  <br/>The javadoc is available <a href="doc/2.2/index.html" target="_blank">here</a>
     </tr>
   </tbody>
 </table>
-
-<p>Since JFXtras-labs is fairly active and improvements are pushed out frequently, you may consider using a snapshot.
-</p>
 
 <h5>Mailing lists</h5>
 
@@ -166,27 +171,27 @@
 <p>The following people have contributed to the JFXtras 2 project.</p>
 
 <ul>
-<li>Stephen Chin (<a href="https://github.com/steveonjava" class="user-mention">@steveonjava</a>) - founder</li>
-<li>Dean Iverson (<a href="https://github.com/deanriverson" class="user-mention">@deanriverson</a>) - founder</li>
-<li>Tom Eugelink (<a href="https://github.com/tbee" class="user-mention">@tbeernot</a>) -  active project lead</li>
-<li>Gerrit Grunwald (<a href="https://github.com/HanSolo" class="user-mention">@HanSolo</a>)</li>
-<li>Thomas Bolz (<a href="https://github.com/teabeeoh" class="user-mention">@teabeeoh</a>)</li>
-<li>Jonathan Giles (<a href="https://github.com/JonathanGiles" class="user-mention">@JonathanGiles</a>)</li>
-<li>Jim Weaver (<a href="https://github.com/javafxpert" class="user-mention">@javafxpert</a>)</li>
-<li>Andy Till (<a href="https://github.com/andytill" class="user-mention">@andytill</a>)</li>
-<li>Andreas Billmann (<a href="https://github.com/frosch95" class="user-mention">@frosch95</a>)</li>
-<li>Gregg Setzer (<a href="https://github.com/GreggSetzer" class="user-mention">@GreggSetzer</a>)</li>
-<li>Hendrik Ebbers (<a href="https://github.com/guigarage" class="user-mention">@guigarage</a>)</li>
-<li>Mark Heckler (<a href="https://github.com/hecklerm" class="user-mention">@hecklerm</a>)</li>
-<li>johnBgood (<a href="https://github.com/johnBgood" class="user-mention">@johnBgood</a>)</li>
-<li>Jose Pereda (<a href="https://github.com/jperedadnr" class="user-mention">@jperedadnr</a>)</li>
-<li>Michael Hoffer (<a href="https://github.com/miho" class="user-mention">@miho</a>)</li>
-<li>Laurent Nicolas (<a href="https://github.com/MrLoNee" class="user-mention">@MrLoNee</a>)</li>
-<li>Sai Pradeep Dandem (<a href="https://github.com/SaiPradeepDandem" class="user-mention">@SaiPradeepDandem</a>)</li>
-<li>Thierry Wasylczenko (<a href="https://github.com/twasyl" class="user-mention">@twasyl</a>)</li>
-<li>Will Hoover (<a href="https://github.com/whoover" class="user-mention">@whoover</a>)</li>
-<li>Carl Dea (<a href="https://github.com/carldea" class="user-mention">@carldea</a>)</li>
-<li>Pedro Duque Vieira (<a href="https://github.com/dukke" class="user-mention">@dukke</a>)</li>
+	<li>Stephen Chin (<a href="https://github.com/steveonjava" class="user-mention">@steveonjava</a>) - founder</li>
+	<li>Dean Iverson (<a href="https://github.com/deanriverson" class="user-mention">@deanriverson</a>) - founder</li>
+	<li>Tom Eugelink (<a href="https://github.com/tbee" class="user-mention">@tbeernot</a>) -  active project lead</li>
+	<li>Gerrit Grunwald (<a href="https://github.com/HanSolo" class="user-mention">@HanSolo</a>)</li>
+	<li>Thomas Bolz (<a href="https://github.com/teabeeoh" class="user-mention">@teabeeoh</a>)</li>
+	<li>Jonathan Giles (<a href="https://github.com/JonathanGiles" class="user-mention">@JonathanGiles</a>)</li>
+	<li>Jim Weaver (<a href="https://github.com/javafxpert" class="user-mention">@javafxpert</a>)</li>
+	<li>Andy Till (<a href="https://github.com/andytill" class="user-mention">@andytill</a>)</li>
+	<li>Andreas Billmann (<a href="https://github.com/frosch95" class="user-mention">@frosch95</a>)</li>
+	<li>Gregg Setzer (<a href="https://github.com/GreggSetzer" class="user-mention">@GreggSetzer</a>)</li>
+	<li>Hendrik Ebbers (<a href="https://github.com/guigarage" class="user-mention">@guigarage</a>)</li>
+	<li>Mark Heckler (<a href="https://github.com/hecklerm" class="user-mention">@hecklerm</a>)</li>
+	<li>johnBgood (<a href="https://github.com/johnBgood" class="user-mention">@johnBgood</a>)</li>
+	<li>Jose Pereda (<a href="https://github.com/jperedadnr" class="user-mention">@jperedadnr</a>)</li>
+	<li>Michael Hoffer (<a href="https://github.com/miho" class="user-mention">@miho</a>)</li>
+	<li>Laurent Nicolas (<a href="https://github.com/MrLoNee" class="user-mention">@MrLoNee</a>)</li>
+	<li>Sai Pradeep Dandem (<a href="https://github.com/SaiPradeepDandem" class="user-mention">@SaiPradeepDandem</a>)</li>
+	<li>Thierry Wasylczenko (<a href="https://github.com/twasyl" class="user-mention">@twasyl</a>)</li>
+	<li>Will Hoover (<a href="https://github.com/whoover" class="user-mention">@whoover</a>)</li>
+	<li>Carl Dea (<a href="https://github.com/carldea" class="user-mention">@carldea</a>)</li>
+	<li>Pedro Duque Vieira (<a href="https://github.com/dukke" class="user-mention">@dukke</a>)</li>
 </ul>
 
 <p>But with all the new members joining this project, the list above will be outdated very soon. On github the most <a href="https://github.com/JFXtras?tab=members">current list of members</a> can be found!</p>
