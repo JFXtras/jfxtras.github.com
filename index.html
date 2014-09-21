@@ -82,7 +82,7 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-          <a id="forkme_banner" href="https://github.com/JFXtras">View on GitHub</a>
+          <a id="forkme_banner" target="_blank" href="https://github.com/JFXtras">View on GitHub</a>
 		<img src="images/jfxtras_logo.png"/ style="border:0px; box-shadow:none;" border="0">
 		
         <h3>Welcome to the JFXtras Project.</h3>
@@ -91,7 +91,7 @@
 
 <h3>JFXtras and JFXtras Labs</h3>
 
-<p>The project is divided into two different pieces.  Components in the official <a href="https://github.com/JFXtras/jfxtras">JFXtras library</a> are considered stable with APIs that are unlikely to change much in future releases.  The <a href="https://github.com/JFXtras/jfxtras-labs">JFXtras Labs library</a> contains components that are currently under active development and are considered experimental.  The API of the components may change significantly from one release to the next, or they may be abandoned completely.</p>
+<p>The project is divided into two different pieces.  Components in the official <a href="https://github.com/JFXtras/jfxtras">JFXtras library</a> are considered stable with APIs that are unlikely to change much in future releases.  The <a href="https://github.com/JFXtras/jfxtras-labs">JFXtras Labs library</a> contains components that are currently under active development and are considered experimental.  The API of the components may change significantly from one release to the next, or they may be abandoned all together.</p>
 
 <p>Once the JFXtras developers feel that a component has reached a mature state, it will be moved from Labs into the main JFXtras library.</p>
 
@@ -100,10 +100,10 @@ Currently JFXtras consists of the following parts:
 <ul>
 	<li><a href="doc/8.0/jfxtras-common/index.html" target="_blank">jfxtras-common</a> - containing basic classes, like layouts, utility classes, etc.</li>
 	<li><a href="doc/8.0/jfxtras-fxml/index.html" target="_blank">jfxtras-fxml</a> - containing FXML related classes, most notably JFXtrasBuilderFactory which is used to easily add builders to the FXMLLoader.</li>
-	<li><a href="doc/8.0/jfxtras-controls/index.html" target="_blank">jfxtras-controls</a> - containing standard controls like several date and time pickers</li>
+	<li><a href="doc/8.0/jfxtras-controls/index.html" target="_blank">jfxtras-controls</a> - containing standard controls, like several date and time pickers</li>
 	<li><a href="doc/8.0/jfxtras-agenda/index.html" target="_blank">jfxtras-agenda</a> - containing a the 'Agenda' (Google Calendar) control</li>
 	<li><a href="doc/8.0/jfxtras-window/index.html" target="_blank">jfxtras-window</a> - containing a non standard Window implementation</li>
-	<li><a href="doc/8.0/jfxtras-menu/index.html" target="_blank">jfxtras-menu</a> - containing menu implementations</li>
+	<li><a href="doc/8.0/jfxtras-menu/index.html" target="_blank">jfxtras-menu</a> - containing menu implementations, like corner and circular popup menu</li>
 	<li style="margin-top:1em;"><a href="doc/8.0labs/index.html" target="_blank">jfxtras-labs</a> - containing incubator classes</li>
 </ul>
 </p>
@@ -138,6 +138,15 @@ Currently JFXtras consists of the following parts:
 -->
 
 <h3>Use It!</h3>
+<p>
+The version system of JFXtras deviates from the commonly used versioning schemes; the first two digits indicate the JavaFX release that is used for the distribution, so 8.0-r2 means "based on JavaFX 8.0", the "-r2" means release 2 of JFXtras. 
+Hence the JFXtras release scheme does not include bug fix releases, only regular releases.
+</p>
+<p>
+The reason of using an "r" in the release has to do with the fact that we do not control the release scheme of JavaFX. 
+If we had chosen the more compatible notation "8.0.1" (.1 indicating JFXtras release 1), and JavaFX would have a bug fix release 8.0.1, we would be in trouble.
+In the releasing scheme with the "r" this would lead to a JFXtras 8.0.1-r1 release.
+</p>
 
 <table style="width: 100%">
   <thead>
@@ -150,7 +159,7 @@ Currently JFXtras consists of the following parts:
   <tbody>
     <tr style="text-align: center">
       <td>org.jfxtras</td>
-      <td>jfxtras-common<br/>jfxtras-fxml<br/>jfxtras-controls<br/>jfxtras-agenda<br/>jfxtras-window<br/>jfxtras-labs</td>
+      <td>jfxtras-common<br/>jfxtras-fxml<br/>jfxtras-controls<br/>jfxtras-agenda<br/>jfxtras-window<br/>jfxtras-menu<br/>jfxtras-labs</td>
       <td>8.0-r2<br/>This is the latest release for Java(FX) 8<br/>(available in <a href="http://central.maven.org/maven2/org/jfxtras/" target="_blank">Maven central</a>)<br/>For Javadoc see the links above</td>
     </tr>
     <tr style="text-align: center">
@@ -174,7 +183,10 @@ Currently JFXtras consists of the following parts:
   </tbody>
 </table>
 
-<h5>Mailing lists</h5>
+<h4>Issues</h4>
+<p>
+If you find any problems, discuss this with the developers on the mailing list, or file an issue on <a target="_blank" href="https://github.com/JFXtras">GitHub</a> for the appropriate project. 
+</p>
 
 <p>The users mailing list is <a href="https://groups.google.com/group/jfxtras-users">here</a> and the developers mailing list is <a href="https://groups.google.com/group/jfxtras-dev">here</a>.
 
@@ -206,7 +218,7 @@ Currently JFXtras consists of the following parts:
 	<li>Pedro Duque Vieira (<a href="https://github.com/dukke" class="user-mention">@dukke</a>)</li>
 </ul>
 
-<p>But with all the new members joining this project, the list above will be outdated very soon. On github the most <a href="https://github.com/JFXtras?tab=members">current list of members</a> can be found!</p>
+<p>On github the most <a target="_blank" href="https://github.com/JFXtras?tab=members">current list of members</a> can be found!</p>
 
       </section>
     </div>
