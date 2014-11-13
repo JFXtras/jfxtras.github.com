@@ -199,6 +199,51 @@ If you find any problems, discuss this with the developers on the mailing list, 
 
 <p>The users mailing list is <a href="https://groups.google.com/group/jfxtras-users">here</a> and the developers mailing list is <a href="https://groups.google.com/group/jfxtras-dev">here</a>.
 
+<h3>Monocle</h3>
+
+<p>
+Monocle is a rendering pipeline implementation for JavaFX aimed at embedded devices. 
+But it also has a special headless mode, which allows programs to run without drawing on an actual screen.
+This mode is very important for unit testing releases on build servers like Jenkins or Travis, but because Monocle is aimed at embedded devices, it is not distributed as part of any Windows or Linux Java distribution.
+Even though the Monocle sources are easy to compile, it still is more convenient to simply add a dependency in Ant / Maven / Gradle, so we have compiled it for you and pushed it out to maven.
+</p>
+<table style="width: 100%">
+  <thead>
+    <tr style="text-align: center">
+      <th>Group ID</th>
+      <th>Artifact ID</th>
+      <th>Version</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="text-align: center">
+      <td>org.jfxtras</td>
+      <td>openjfx-monocle</td>
+      <td>1.8.0_20<br/>The version is the same as the Java(FX) version the sources were copied from.<br/>(available in <a href="http://central.maven.org/maven2/org/jfxtras/openjfx-monocle/" target="_blank">Maven central</a>)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Since com.sun.glass.ui.PlatformFactory can't find Monocle classes from the external jars, we need to change:</p>
+<p>
+public static void main(String[] appArgs) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;    Application.launch(appClass, appArgs);<br/>
+}<br/>
+</p>
+<p>
+to
+</p>
+<p>
+public static void main(String[] appArgs) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;    new ToolkitApplicationLauncher().launch(appClass, appArgs);<br/>
+}<br/>
+</p>
+<p>
+and start the Application with -Djavafx.monocle.headless=true.<br/>
+<br/>
+ToolkitApplicationLauncher.jar: https://gist.github.com/hastebrot/cbca1128dd791966e3a6
+</p>
+
 <h3>Authors and Contributors</h3>
 
 <p>The following people have contributed to the JFXtras 2 project.</p>
