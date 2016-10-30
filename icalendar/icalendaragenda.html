@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="JFXtras : A set of high quality controls and add-ons for JavaFX." />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="../resources/css/jfxtras.css">
+
+</head><p>Written in Java, iCalendarAgenda is an open-source JavaFx control to display, add and revise iCalendar objects based on the RFC 5545 standard.  It is available for free download at <a href="http://jfxtras.org/">JFXtras</a>.  iCalendarAgenda displays and edits <a href="icalendarfx.htm">iCalendarFx</a> calendar objects.</p>
+<h3>Usage</h3>
+<p>The ICalendarAgenda constructor requires a VCalendar argument.  The VCalendar can contain child calendar components or be empty.  The simple example below displays an empty ICalendarAgenda.</p>
+<pre>public class ICalendarAgendaSimpleTrial1 extends Application
+{        
+    public static void main(String[] args) {
+        launch(args);       
+    }
+
+    @Override
+    public void start(Stage primaryStage) {
+        VCalendar vCalendar = new VCalendar();
+        ICalendarAgenda agenda = new ICalendarAgenda(vCalendar);
+        
+        BorderPane root = new BorderPane();
+        root.setCenter(agenda);
+        Scene scene = new Scene(root, 1366, 768);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+}</pre>
+<h3>Recommended Initialization</h3>
+<h4>Organizer Property</h4>
+<p>ICalendarAgenda creates and modifies calendar components by sending iTIP messages to iCalendarFx for processing.  ITIP messages require the ORGANIZER property to be set.  There is a default organizer value in ICalendarAgenda so it will work without it being set.  However, it should be set to the email address of the calendar user.  All calendar components created by ICalendarAgenda have the ORGANIZER property set to this value.  It can be set by chaining during ICalendarAgenda object creation or via a setter.  An example using a setter is below.</p>
+<pre>VCalendar myCalendar = new VCalendar();
+ICalendarAgenda myAgenda = new ICalendarAgenda(myCalendar);
+myAgenda.setOrganizer("mailto:david.bal37@gmail.com");
+</pre>
+<p>For the example above, any calendar component created by <em>myAgenda</em> will have the following property line:</p>
+<pre>ORGANIZER:mailto:david.bal37@gmail.com</pre>
+<h3>Add Components Graphically<img align="right" src="out-20.gif" alt="out-20" width="592" height="416" /></h3>
+<p>Calendar components can be created by graphically interacting with the Agenda control.  The date/time format of graphically added properties is ZonedDateTime with the ZoneId set to the default of the system the application is on.  The animation to the right demonstrates the graphical addition process.  The calendar component created is as follows:</p>
+<pre>BEGIN:VEVENT
+ORGANIZER:mailto:default_organizer@example.org
+SUMMARY:New
+CATEGORIES:group00
+DTSTART;TZID=America/Los_Angeles:20161007T121000
+DTEND;TZID=America/Los_Angeles:20161007T140500
+CREATED:20161005T191053Z
+DTSTAMP:20161005T191053Z
+UID:20161005T121053-2jfxtras.org
+SEQUENCE:1
+END:VEVENT</pre>
+<h3>Add Components via iTIP Messages</h3>
+<p>When the main VCalendar processes an iTIP PUBLISH message the calendar components are automatically displayed on Agenda. The below example shows this feature:</p>
+<pre>VCalendar myCalendar = new VCalendar();
+ICalendarAgenda myAgenda = new ICalendarAgenda(myCalendar);
+String publishMessage = "BEGIN:VCALENDAR" + System.lineSeparator() + 
+        "METHOD:PUBLISH" + System.lineSeparator() + 
+        "PRODID:-//Example/ExampleCalendarClient//EN" + System.lineSeparator() + 
+        "VERSION:2.0" + System.lineSeparator() + 
+        "BEGIN:VEVENT" + System.lineSeparator() + 
+        "ORGANIZER:mailto:a@example.com" + System.lineSeparator() + 
+        "DTSTART:20150701T200000Z" + System.lineSeparator() + 
+        "DTEND:20150701T220000Z" + System.lineSeparator() + 
+        "DTSTAMP:20150611T190000Z" + System.lineSeparator() + 
+        "RRULE:FREQ=WEEKLY;BYDAY=FR" + System.lineSeparator() +
+        "SUMMARY:Friday meeting with Joe" + System.lineSeparator() + 
+        "UID:0981234-1234234-23@example.com" + System.lineSeparator() + 
+        "END:VEVENT" + System.lineSeparator() + 
+        "END:VCALENDAR";
+myCalendar.processITIPMessage(publishMessage);</pre>
+<p>The result of the processing the above iTIP message is the addition of a 2-hour weekly Friday event that is automatically displayed on Agenda.</p>
+<p>Note: To obtain the above described behavior, the ICalendarAgenda object must be added to a shown scene. See the example under the Usage section for an example.</p>
+<h3>Changing Components Graphically<img src="graphical-edit3.gif" align="right" alt="graphical-edit3" width="576" height="400" /></h3>
+<p>Calendar components can be changed graphically by the following mechanisms:</p>
+<ul>
+<li>Clicking on an instance and dragging it to a new position on the agenda.
+<ul>
+<li>Shown in above animation after new instance is drawn.</li>
+</ul>
+</li>
+<li>Dragging the dark line at the bottom of an instance to change the end time
+<ul>
+<li>See animation to the right.</li>
+</ul>
+</li>
+<li>Non-recurring components
+<ul>
+<li>The component is changed is automatically after the graphical interaction.</li>
+</ul>
+</li>
+<li>Recurring Components
+<ul>
+<li>A change to a component with a recurrence rule (RRULE) can have three scopes - one, all and this-and-future.  After a graphical change a dialog appears prompting the user to specify the scope of the change.  After the OK button is clicked in the dialog the change is applied.</li>
+</ul>
+</li>
+</ul>
+<h3>Changing Components with Edit Popup</h3>
+<p>A popup to do advanced changes can be opened in two ways</p>
+<img src="popup-animation.gif" alt="popup-animation" align="right" width="400" height="598" />
+<ul>
+<li>By right-clicking on an instance</li>
+<li>By left-clicking on an instance and clicking the edit button.</li>
+</ul>
+<p>The edit popup can modify the following properties.  The iCalendar property name is in parenthesis.</p>
+<ul>
+<li>Start time (DTSTART)</li>
+<li>End time (DTEND)</li>
+<li>Summary (SUMMARY)</li>
+<li>Description (DESCRIPTION)</li>
+<li>Location (LOCATION)</li>
+<li>Category (CATEGORIES)
+<ul>
+<li>Only one category supported</li>
+<li>Can be associated with a color that is used to render the background of instances in agenda</li>
+</ul>
+</li>
+<li>Recurrence Rule (RRULE)
+<ul>
+<li>Repeat Frequency (FREQUENCY)</li>
+<li>Repeat every (INTERVAL)</li>
+<li>Date to end on (UNTIL)</li>
+<li>End after a number of events (COUNT)</li>
+</ul>
+</li>
+<li>Exception date/times (EXDATE)</li>
+</ul>
+<h3>Changing Components with iTIP Message</h3>
+<p>Components, and the displayed instances in agenda, can be changed by processing iTIP messages.  In fact, ICalendarAgenda performs all changes, either graphical or through the edit popup, by creating iTIP messages to be processed by the main VCalendar object.  The VCalendar doesn't know the source of the iTIP message.  It will process any iTIP message and agenda will display the resulting chage automatically.</p>
+<p>For example, events can be imported from a different calendaring system such as Google Calendar.  The below video demonstrates the process.</p>
+<p style="text-align: center;"><a href="https://github.com/JFXtras/jfxtras/tree/8.0/jfxtras-icalendaragenda"><img title="iCalendarAgenda at GitHub" src="GitHub-Mark-64px.png" alt="iCalendarAgenda at GibHub" width="64" height="64" /></a></p>
+<p style="text-align: center;"><a href="https://github.com/JFXtras/jfxtras/tree/8.0/jfxtras-icalendaragenda"><strong>iCalendarAgenda at GitHub</strong></a></p>
+</body>
+</html>
+
