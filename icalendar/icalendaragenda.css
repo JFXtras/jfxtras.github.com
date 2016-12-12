@@ -1,0 +1,53 @@
+.simple-gallery{
+    position: relative;
+    z-index: 1;
+}
+.simple-gallery--preview{
+    float: right;
+    min-height: 1px;
+    margin-left: 20px;
+}
+.simple-gallery--thumbs{
+    float: right;
+    min-height: 1px;
+    margin-left: 20px;
+}
+.simple-gallery--thumbs>div{
+    position: relative;
+    overflow: hidden;
+    max-width: 100%;
+    margin-top: 9px;
+}
+.simple-gallery--thumbs>div:first-child{
+    margin-top: 0;
+}
+
+.simple-video-content{
+    float: right;
+    min-height: 1px;
+    margin-right: 20px;
+}
+
+.icalendar-content{
+	padding-left: 30px;
+}
+
+figure {
+    display: inline-block;
+    border: 1px dotted gray;
+    margin: 20px; /* adjust as needed */
+}
+figure img {
+    vertical-align: top;
+}
+figure figcaption {
+    border: 1px dotted blue;
+    text-align: left;
+}
+
+.centered-thing {
+    position: relative;
+    margin: auto;
+    left: 50%;
+    transform: translate(-50%, 0%);
+}

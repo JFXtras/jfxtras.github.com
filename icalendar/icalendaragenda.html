@@ -1,21 +1,15 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="JFXtras : A set of high quality controls and add-ons for JavaFX." />
-
-    <link rel="stylesheet" type="text/css" media="screen" href="../resources/css/jfxtras.css">
-
-</head><p>Written in Java, iCalendarAgenda is an open-source JavaFx control to display, add and revise iCalendar objects based on the RFC 5545 standard.  It is available for free download at <a href="http://jfxtras.org/">JFXtras</a>.  iCalendarAgenda displays and edits <a href="icalendarfx.htm">iCalendarFx</a> calendar objects.</p>
-<h3>Usage</h3>
-<p>The ICalendarAgenda constructor requires a VCalendar argument.  The VCalendar can contain child calendar components or be empty.  The simple example below displays an empty ICalendarAgenda.</p>
-<pre>public class ICalendarAgendaSimpleTrial1 extends Application
+	<link rel="stylesheet" type="text/css" href="icalendaragenda.css">
+</head>
+<h2 style="text-align: center;">iCalendarAgenda</h2>
+<h3>Summary</h3>
+iCalendarAgenda is an open-source iCalendar control written in Java.  It creates and edits calendar components that comply with iCalendar <a href="https://tools.ietf.org/html/rfc5545">RFC 5545</a> (e.g. VEVENT, VTOTO and VJOURNAL).  <a href="icalendarfx.htm">iCalendarFx</a> is the iCalendar model used in iCalendarAgenda. There is complete support for VEVENT.  However, VTODO and VJOURNAL can be displayed and edited, but not created.  It is an extension of <a href="http://jfxtras.org/">JFXtras'</a> Agenda.  It utilizes features of Java 8 and JavaFx.
+<h3>Simple Example</h3>
+The ICalendarAgenda constructor requires a VCalendar argument.  The VCalendar stores all calendar elements.  The simple JavaFx application below displays an empty ICalendarAgenda which can have events added to it.
+<pre style="padding-left: 30px;">public class ICalendarAgendaSimpleTrial1 extends Application
 {        
-    public static void main(String[] args) {
-        launch(args);       
-    }
-
     @Override
     public void start(Stage primaryStage) {
         VCalendar vCalendar = new VCalendar();
@@ -28,18 +22,39 @@
         primaryStage.show();
     }
 }</pre>
-<h3>Recommended Initialization</h3>
+<h3>Recommended Setup</h3>
+The above example relies on the default Organizer and UID Generator Callback.  It is recommended that those properties be changed.
 <h4>Organizer Property</h4>
-<p>ICalendarAgenda creates and modifies calendar components by sending iTIP messages to iCalendarFx for processing.  ITIP messages require the ORGANIZER property to be set.  There is a default organizer value in ICalendarAgenda so it will work without it being set.  However, it should be set to the email address of the calendar user.  All calendar components created by ICalendarAgenda have the ORGANIZER property set to this value.  It can be set by chaining during ICalendarAgenda object creation or via a setter.  An example using a setter is below.</p>
-<pre>VCalendar myCalendar = new VCalendar();
+ICalendarAgenda creates and modifies calendar components by sending iTIP messages to iCalendarFx for processing.  ITIP messages require the ORGANIZER property to be set.  There is a default organizer value in ICalendarAgenda so it will work without it being set.  However, it should be set to the email address of the calendar user.  All calendar components created by ICalendarAgenda have the ORGANIZER property set to this value.  It can be set by chaining during ICalendarAgenda object creation or via a setter.  An example using a setter is below.
+<pre style="padding-left: 30px;">VCalendar myCalendar = new VCalendar();
 ICalendarAgenda myAgenda = new ICalendarAgenda(myCalendar);
 myAgenda.setOrganizer("mailto:david.bal37@gmail.com");
 </pre>
-<p>For the example above, any calendar component created by <em>myAgenda</em> will have the following property line:</p>
-<pre>ORGANIZER:mailto:david.bal37@gmail.com</pre>
-<h3>Add Components Graphically<img align="right" src="out-20.gif" alt="out-20" width="592" height="416" /></h3>
-<p>Calendar components can be created by graphically interacting with the Agenda control.  The date/time format of graphically added properties is ZonedDateTime with the ZoneId set to the default of the system the application is on.  The animation to the right demonstrates the graphical addition process.  The calendar component created is as follows:</p>
-<pre>BEGIN:VEVENT
+For the example above, any calendar component created by <em>myAgenda</em> will have the following property line:
+<pre style="padding-left: 30px;">ORGANIZER:mailto:david.bal37@gmail.com
+</pre>
+<h4>UID Generator Callback</h4>
+The UID Generator Callback is a Callback&lt;Void, String&gt;.  It provides UID values for created components. The default one just supplies a string containing the date, a counter, and jfxtras.org.  An example of a custom one is below:
+<pre style="padding-left: 30px;">
+Callback<Void, String> uidCallback = (Void) -&gt;
+  LocalDateTime.now().toString() + "-" +
+  processId() + "-" + // notional method to return unique process id value
+  eventCounter() + // notional method to return sequential event counter
+  ".myapp.com";
+agenda.setUidGeneratorCallback(uidCallback);
+</pre>
+<h3>Add Components Graphically
+</h3>
+<p>Calendar components can be created by graphically interacting with the Agenda control.  The following animations demonstrate the graphical addition process.  The calendar component created are in the captions:</p>
+
+<figure>
+	<video width="500" height="306" controls>
+	<source src="graphical_create_one.m4v" type="video/mp4">
+	Your browser does not support the video tag.
+	</video>
+	<figcaption>
+		<pre class="icalendar-content">
+BEGIN:VEVENT
 ORGANIZER:mailto:default_organizer@example.org
 SUMMARY:New
 CATEGORIES:group00
@@ -49,7 +64,207 @@ CREATED:20161005T191053Z
 DTSTAMP:20161005T191053Z
 UID:20161005T121053-2jfxtras.org
 SEQUENCE:1
-END:VEVENT</pre>
+END:VEVENT
+		</pre>
+	</figcaption>
+</figure>
+
+<figure>
+	<video width="500" height="300" controls>
+	<source src="change_with_popup1.m4v" type="video/mp4">
+	Your browser does not support the video tag.
+	</video>
+	<figcaption>
+		<pre class="icalendar-content">
+BEGIN:VEVENT
+ORGANIZER:mailto:default_organizer@example.org
+SUMMARY:New
+CATEGORIES:group00
+DTSTART;TZID=America/Los_Angeles:20161107T100500
+DTEND;TZID=America/Los_Angeles:20161107T120000
+CREATED:20161108T065849Z
+DTSTAMP:20161108T065849Z
+UID:20161107T225849-1jfxtras.org
+RRULE:FREQ=DAILY;INTERVAL=2
+END:VEVENT
+		</pre>
+	</figcaption>
+</figure>
+
+<figure>
+	<video width="500" height="331" controls>
+	<source src="change_with_popup2.m4v" type="video/mp4">
+	Your browser does not support the video tag.
+	</video>
+	<figcaption>
+		<pre class="icalendar-content">
+BEGIN:VEVENT
+ORGANIZER:mailto:default_organizer@example.org
+SUMMARY:New
+CATEGORIES:group00
+DTSTART;TZID=America/Los_Angeles:20161107T090000
+DTEND;TZID=America/Los_Angeles:20161107T105500
+CREATED:20161108T163414Z
+DTSTAMP:20161108T163414Z
+UID:20161108T083414-2jfxtras.org
+RRULE:FREQ=WEEKLY;BYDAY=MO,WE,FR;UNTIL=20161214T170000Z
+EXDATE;TZID=America/Los_Angeles:20161109T090000
+END:VEVENT
+		</pre>
+	</figcaption>
+</figure>
+
+
+<h3>Change Events Graphically
+<div style="float:right">
+<video width="462" height="265" controls>
+  <source src="graphical_change_one.m4v" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+<video width="462" height="306" controls>
+  <source src="graphical_change_repeatable.m4v" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+
+</div>
+</h3>
+The following properties can be changed graphically:
+<ul>
+ 	<li>Change date/time</li>
+ 	<li>Change end time</li>
+ 	<li>Move to full-day</li>
+ 	<li>Move to time-based</li>
+</ul>
+<p>
+The start and end date/time can be changed by dragged to a new date/time. The end time can be changed by grabbing and moving the line at the bottom of the recurrence. A time-based recurrence can be made whole day and a whole day recurrence can be made time-based.
+</p>
+<p>
+<img style="float:right" src="edit_dialog.gif"/>
+If the recurrence belongs to a repeatable series then the scope of the change needs to be specified.  A dialog to prompt the user for a selection will appear.  There are three options. First, the change can apply to the "this event only."  In that case a new calendar event is created with the same UID and a new RECURRENCE-ID property specifying the recurrence its replacing.  The original event is unchanged.  Second, the change can apply to "this and future events" by creating a new event that starts on the selected recurrence.  Also, an UNTIL property is added to the original event's RRULE.  Third, the change can be applied to "all events in series" - which simply makes all changes to the original event.
+</p>
+<div>
+	<h3>Changing Components with Edit Popup</h3>
+	<div class="simple-gallery">
+	  <div class="simple-gallery--thumbs">
+	  <figure>
+		<video width="500" height="331" controls>
+		<source src="change_with_popup3.m4v" type="video/mp4">
+		Your browser does not support the video tag.
+		</video>
+		<figcaption>
+			<pre class="icalendar-content">
+BEGIN:VEVENT
+ORGANIZER:mailto:default_organizer@example.org
+SUMMARY:New2
+CATEGORIES:group07
+DTSTART;TZID=America/Los_Angeles:20161107T120000
+DTEND;TZID=America/Los_Angeles:20161107T140000
+CREATED:20161109T081420Z
+DTSTAMP:20161109T081453Z
+UID:20161109T001420-1jfxtras.org
+RRULE:FREQ=WEEKLY;BYDAY=MO,TU,FR;COUNT=10
+SEQUENCE:1
+END:VEVENT
+			</pre>
+		</figcaption>
+	</figure>
+	  <div class="simple-gallery--preview">
+		<img src="popup-animation.gif"/>
+	  </div>
+	</div>   
+</div>
+
+A popup to do advanced changes can be opened in three ways
+<ul>
+ 	<li>Click Edit in the new event dialog</li>
+ 	<li>Right-clicking on a recurrence</li>
+ 	<li>By left-clicking on a recurrence and clicking the edit button.</li>
+</ul>
+The edit popup can modify the following properties.  The iCalendar property name is in parenthesis.
+<ul>
+ 	<li>Appointment Tab
+<ul>
+ 	<li>Start time (DTSTART)</li>
+ 	<li>End time (DTEND)</li>
+ 	<li>Summary (SUMMARY)</li>
+ 	<li>Description (DESCRIPTION)</li>
+ 	<li>Location (LOCATION)</li>
+ 	<li>Category (CATEGORIES)
+<ul>
+ 	<li>Only one category supported</li>
+ 	<li>Can be associated with a color that is used to render the background of instances in agenda</li>
+</ul>
+</li>
+</ul>
+</li>
+ 	<li>Repeatable Tab
+<ul>
+ 	<li>Recurrence Rule (RRULE)
+<ul>
+ 	<li>Repeat Frequency (FREQUENCY)</li>
+ 	<li>Repeat every (INTERVAL)</li>
+ 	<li>Date to end on (UNTIL)</li>
+ 	<li>End after a number of events (COUNT)</li>
+</ul>
+</li>
+</ul>
+</li>
+ 	<li>Exception date/times (EXDATE)</li>
+</ul>
+<p>
+When the frequency is weekly, check boxes for each day of the week appears. When the frequency is monthly checkboxes for day of month or day of week appear. A simple-language explanation of the repeat rule is displayed in the summary field
+</p>
+
+<div>
+<h3>Delete Events Graphically</h3>
+
+  <figure style="float:right">
+	<video width="500" height="331" controls>
+	<source src="delete-events.m4v" type="video/mp4">
+	Your browser does not support the video tag.
+	</video>
+	<figcaption style="float:right">
+		<pre class="icalendar-content">
+BEGIN:VEVENT
+ORGANIZER:mailto:default_organizer@example.org
+SUMMARY:New
+CATEGORIES:group00
+DTSTART;TZID=America/Los_Angeles:20161107T081000
+DTEND;TZID=America/Los_Angeles:20161107T091000
+CREATED:20161109T204639Z
+DTSTAMP:20161109T204644Z
+UID:20161109T124639-3jfxtras.org
+RRULE:FREQ=DAILY
+EXDATE;TZID=America/Los_Angeles:20161109T081000
+SEQUENCE:1
+END:VEVENT
+
+BEGIN:VEVENT
+ORGANIZER:mailto:default_organizer@example.org
+SUMMARY:New
+CATEGORIES:group00
+DTSTART;TZID=America/Los_Angeles:20161106T100500
+DTEND;TZID=America/Los_Angeles:20161106T105500
+CREATED:20161109T204648Z
+DTSTAMP:20161109T204652Z
+UID:20161109T124648-4jfxtras.org
+RRULE:FREQ=DAILY;UNTIL=20161108T180500Z
+SEQUENCE:1
+END:VEVENT
+		</pre>
+	</figcaption>
+	</figure>
+	
+	<p>
+	Events can be deleted in three ways.  First, they can be deleted by selecting them and pressing the delete key.  Second, you can click delete from the selected recurrence dialog.  Third, You can click delete from the edit popup.
+	</p>
+	</p>
+	<p>
+	If the event is repeatable then a dialog is displayed to prompt the user to specify the scope of the deletion - just like for repeatable edits.  The delete dialog has three options.  First, is "this event only" - which adds an EXDATE property.  The second is "this and future events."  This options adds an UNTIL element to the RRULE.  The third options is "all events in the series."  This option entirely removes the event - it's deleted from the Vcalendar.
+	</p>
+	<p>The animation to the right show the different delete options and the resulting iCalendar content.</p>
+</div>
+
 <h3>Add Components via iTIP Messages</h3>
 <p>When the main VCalendar processes an iTIP PUBLISH message the calendar components are automatically displayed on Agenda. The below example shows this feature:</p>
 <pre>VCalendar myCalendar = new VCalendar();
@@ -71,63 +286,14 @@ String publishMessage = "BEGIN:VCALENDAR" + System.lineSeparator() +
 myCalendar.processITIPMessage(publishMessage);</pre>
 <p>The result of the processing the above iTIP message is the addition of a 2-hour weekly Friday event that is automatically displayed on Agenda.</p>
 <p>Note: To obtain the above described behavior, the ICalendarAgenda object must be added to a shown scene. See the example under the Usage section for an example.</p>
-<h3>Changing Components Graphically<img src="graphical-edit3.gif" align="right" alt="graphical-edit3" width="576" height="400" /></h3>
-<p>Calendar components can be changed graphically by the following mechanisms:</p>
-<ul>
-<li>Clicking on an instance and dragging it to a new position on the agenda.
-<ul>
-<li>Shown in above animation after new instance is drawn.</li>
-</ul>
-</li>
-<li>Dragging the dark line at the bottom of an instance to change the end time
-<ul>
-<li>See animation to the right.</li>
-</ul>
-</li>
-<li>Non-recurring components
-<ul>
-<li>The component is changed is automatically after the graphical interaction.</li>
-</ul>
-</li>
-<li>Recurring Components
-<ul>
-<li>A change to a component with a recurrence rule (RRULE) can have three scopes - one, all and this-and-future.  After a graphical change a dialog appears prompting the user to specify the scope of the change.  After the OK button is clicked in the dialog the change is applied.</li>
-</ul>
-</li>
-</ul>
-<h3>Changing Components with Edit Popup</h3>
-<p>A popup to do advanced changes can be opened in two ways</p>
-<img src="popup-animation.gif" alt="popup-animation" align="right" width="400" height="598" />
-<ul>
-<li>By right-clicking on an instance</li>
-<li>By left-clicking on an instance and clicking the edit button.</li>
-</ul>
-<p>The edit popup can modify the following properties.  The iCalendar property name is in parenthesis.</p>
-<ul>
-<li>Start time (DTSTART)</li>
-<li>End time (DTEND)</li>
-<li>Summary (SUMMARY)</li>
-<li>Description (DESCRIPTION)</li>
-<li>Location (LOCATION)</li>
-<li>Category (CATEGORIES)
-<ul>
-<li>Only one category supported</li>
-<li>Can be associated with a color that is used to render the background of instances in agenda</li>
-</ul>
-</li>
-<li>Recurrence Rule (RRULE)
-<ul>
-<li>Repeat Frequency (FREQUENCY)</li>
-<li>Repeat every (INTERVAL)</li>
-<li>Date to end on (UNTIL)</li>
-<li>End after a number of events (COUNT)</li>
-</ul>
-</li>
-<li>Exception date/times (EXDATE)</li>
-</ul>
+
 <h3>Changing Components with iTIP Message</h3>
-<p>Components, and the displayed instances in agenda, can be changed by processing iTIP messages.  In fact, ICalendarAgenda performs all changes, either graphical or through the edit popup, by creating iTIP messages to be processed by the main VCalendar object.  The VCalendar doesn't know the source of the iTIP message.  It will process any iTIP message and agenda will display the resulting chage automatically.</p>
-<p>For example, events can be imported from a different calendaring system such as Google Calendar.  The below video demonstrates the process.</p>
+<p>Components, and the displayed instances in agenda, can be changed by processing iTIP messages.  In fact, ICalendarAgenda performs all changes, either graphical or through the edit popup, by creating iTIP messages to be processed by the main VCalendar object.  The VCalendar doesn't know the source of the iTIP message.  iCalendarAgenda listens to any changes to the VCalendar's events and automatically displays the changes.</p>
+<p>For example, events can be imported from a different calendaring system such as Google Calendar.</p>
+<p>For more information please see my YouTube videos:</p>
+<iframe class="centered-thing" width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=PLGEK8X_aQRqW8HIK3PRBPkuOjD7Z_CeK6" frameborder="0" allowfullscreen>
+</iframe>
+
 <p style="text-align: center;"><a href="https://github.com/JFXtras/jfxtras/tree/8.0/jfxtras-icalendaragenda"><img title="iCalendarAgenda at GitHub" src="GitHub-Mark-64px.png" alt="iCalendarAgenda at GibHub" width="64" height="64" /></a></p>
 <p style="text-align: center;"><a href="https://github.com/JFXtras/jfxtras/tree/8.0/jfxtras-icalendaragenda"><strong>iCalendarAgenda at GitHub</strong></a></p>
 </body>
