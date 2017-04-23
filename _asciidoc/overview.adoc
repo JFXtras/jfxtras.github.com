@@ -105,6 +105,20 @@ CirclePopupMenu makes the icons of the menu appear where the right mouse button 
 
 image::gallery/CirclePopupMenu.gif[]
 
+== ResponsivePane
+ResponsivePane as created as a result of an https://tbeernot.wordpress.com/2016/12/11/responsivepane/[experiment] to see how much effort it is to support multiple platforms using a single code base.
+This pane tries to find the best combination of layout and CSS file, given a certain resolution.
+The application can render itself in a grid form:
+
+image::ResponsivePane/dh2fx_desktop0-9.png[]
+ 
+Or if the resolution becomes too small, it can switch to a layout based on tabs, increasing the size of the ListSpinner arrows because this probably is a touch environment.
+
+image::ResponsivePane/dh2fx_phone0-9_picker.png[]
+
+When this switch is made, is configurable.
+The logic behind it, including DPI scaling, is what ResponsivePane handles.
+
 == Binding
 Some of the standard controls lack a convenient binding feature.
 

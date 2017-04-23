@@ -439,6 +439,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_circlepopupmenu">CirclePopupMenu</a></li>
 </ul>
 </li>
+<li><a href="#_responsivepane">ResponsivePane</a></li>
 <li><a href="#_binding">Binding</a>
 <ul class="sectlevel2">
 <li><a href="#_togglegroupvalue">ToggleGroupValue</a></li>
@@ -627,6 +628,33 @@ Based on this layout there are a number of animated menu&#8217;s available, whic
 </div>
 </div>
 <div class="sect1">
+<h2 id="_responsivepane">ResponsivePane</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>ResponsivePane as created as a result of an <a href="https://tbeernot.wordpress.com/2016/12/11/responsivepane/">experiment</a> to see how much effort it is to support multiple platforms using a single code base.
+This pane tries to find the best combination of layout and CSS file, given a certain resolution.
+The application can render itself in a grid form:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ResponsivePane/dh2fx_desktop0-9.png" alt="dh2fx desktop0 9">
+</div>
+</div>
+<div class="paragraph">
+<p>Or if the resolution becomes too small, it can switch to a layout based on tabs, increasing the size of the ListSpinner arrows because this probably is a touch environment.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ResponsivePane/dh2fx_phone0-9_picker.png" alt="dh2fx phone0 9 picker">
+</div>
+</div>
+<div class="paragraph">
+<p>When this decision is made, is configured.
+The logic behind it all, including DPI scaling, is what ResponsivePane handles.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_binding">Binding</h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -671,7 +699,7 @@ textField.textProperty().bindBidirectional(listView.selectedItemProperty());</co
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-04-23 14:43:55 CEST
+Last updated 2017-04-23 20:41:51 CEST
 </div>
 </div>
 </body>
