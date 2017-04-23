@@ -1,10 +1,7 @@
 = JFXtras overview
-Tom Eugelink <tbee@tbee.org>
 :imagesdir: images
 :toc:
-:toc-placement: preamble
 
-image::jfxtras_logo1_white.png[]
 
 == Agenda
 Agenda is an implementation of a calendar component similar to Google Calendar. 
@@ -22,6 +19,118 @@ ICalendarAgenda is an extension to Agenda, which picks up where Agenda stops in 
 
 image::gallery/ICalendarAgenda.png[]
 
-    
+== CalendarPicker
+JavaFX now has a default date picker control, but it is only available as a popup to a textfield. 
+JFXtras' CalendarPicker (and related LocalDatePicker and LocalDateTimePicker) are stand alone controls, which can be put into forms directly.
+
+image::gallery/DatePicker.png[]
+
+Of course they also are used by the TextField equivalents (like CalendarTextField).
+Furthermore, the Calendar and LocalDateTime pickers allow for also selecting a time up to seconds, by combining the TimePicker control.
+
+image::gallery/DateTextField.png[]
+
+== ListSpinner
+Years before JavaFX got a spinner control, JFXtras had ListSpinner which is used to select year and month in the CalendarPicker.
+It is a simple control that selects the value in a list.
+Using CSS it is possible to determining where the arrows are placed and pointing, both horizontally and vertically.
+
+image::gallery/ListSpinner.png[]
+
+== Layout
+The standard layout classes in JavaFX are somewhat strange, they work on the assumption that if a node can be part of multiple layouts, that they have the same constraints in all. 
+The chance of that being the case is very unlikely, but it is still a big influence on how the API of the layout classes is designed.
+JFXtras offers an alternative API on the more popular layout implementations (drop-in replacements) that take a more conventional approach, and arguably more readable.
+
+=== GridPane 
+Orginally one would add a control to a gridpane with the following code:
+
+[source,java]
+----
+Text t = new Text("text");
+gridPane.add(t, 1, 2, 2, 2));
+GridPane.setHAlignment(t, HPos.CENTER);
+----
+
+The issue is that a separate variable is required for the control, and what exactly is the row, column order again? 
+Is the control in the code above placed in row and column 1 or 2? +
+JFXtras' alternative API looks like this:
+
+[source,java]
+----
+gridPane.add(new Text("text"), new GridPane.C()
+    .col(1).row(2)
+    .colSpan(2).rowSpan(2)
+    .halignment(HPos.CENTER));
+----
+
+Maybe not much more compact, but certainly more readable, and that is more important. +
+Similar API's exists for other layouts.
 
 
+=== HBox, VBox
+[source,java]
+----
+Button b = new Button("text");
+b.setMaxHeight(50.0);
+hbox.getChildren().add(b);
+HBox.setHgrow(b1, Priority.ALWAYS);
+----
+
+In the code above a static method is used to set values in a node's layout map, meaning that this will be applied in all layouts.
+
+[source,java]
+----
+hbox.add(new Button("text"), new HBox.C()
+    .maxHeight(50.0)
+    .hgrow(Priority.ALWAYS));
+----
+
+== CircularPane
+Beside new API's for existing layouts, JFXtras also has a couple for new layouts. 
+The first is the CircularPane, which lays out its children in a circle.
+
+image::gallery/CircularPane.png[]
+
+The animation on how the icons flow into place (or back), plus the arc on which they are shown, is configurable. 
+Based on this layout there are a number of animated menu's available, which demonstrate the placement and animation of CircularPane. 
+
+=== CornerMenu
+CornerMenu pops out from any of the four corners of a window, animating icons out over a 90 degree arc.
+
+image::gallery/CornerMenu.gif[]
+
+=== CirclePopupMenu
+CirclePopupMenu makes the icons of the menu appear where the right mouse button is clicked.
+
+image::gallery/CirclePopupMenu.gif[]
+
+== Binding
+Some of the standard controls lack a practical binding feature.
+A good example of this is the ToggleGroup, which allows to synchronize multiple toggling controls (like ToggleButton or RadioButton) to be synced, so that only one toggle can be selected at a time.
+
+=== ToggleGroupValue 
+But ToggleGroup lacks a way to associate the selected toggle with an actual value. 
+For this JFXtras offers ToggleGroupValue, a drop-in extension to ToggleGroup.
+
+[source,java]
+----
+ToggleGroupValue<String> toggleGroupValue = new ToggleGroupValue<>();
+toggleGroupValue.add(new RadioButton("Animal that quacks"), "duck");
+toggleGroupValue.add(new RadioButton("Animal that barks"), "dog");
+toggleGroupValue.add(new RadioButton("Animal that roars"), "lion");
+...
+textField.textProperty().bindBidirectional(toggleGroupValue.valueProperty());
+----
+
+The main difference is that when adding a toggle to ToggleGroupValue, the associated value is provides as well, and can be read, written or bound to.  
+
+=== ListView
+The drop-in replacement for ListView allows easy binding to the selected value.
+
+[source,java]
+----
+ListView<String> listView = new ListView<String>();
+...
+textField.textProperty().bindBidirectional(listView.selectedItemProperty());
+----

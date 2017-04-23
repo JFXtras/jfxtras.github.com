@@ -5,7 +5,6 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.5">
-<meta name="author" content="Tom Eugelink">
 <title>JFXtras overview</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
@@ -422,27 +421,34 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <body class="article">
 <div id="header">
 <h1>JFXtras overview</h1>
-<div class="details">
-<span id="author" class="author">Tom Eugelink</span><br>
-<span id="email" class="email"><a href="mailto:tbee@tbee.org">tbee@tbee.org</a></span><br>
-</div>
-</div>
-<div id="content">
-<div id="preamble">
-<div class="sectionbody">
-<div class="imageblock">
-<div class="content">
-<img src="images/jfxtras_logo1_white.png" alt="jfxtras logo1 white">
-</div>
-</div>
-</div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#_agenda">Agenda</a></li>
+<li><a href="#_calendarpicker">CalendarPicker</a></li>
+<li><a href="#_listspinner">ListSpinner</a></li>
+<li><a href="#_layout">Layout</a>
+<ul class="sectlevel2">
+<li><a href="#_gridpane">GridPane</a></li>
+<li><a href="#_hbox_vbox">HBox, VBox</a></li>
+</ul>
+</li>
+<li><a href="#_circularpane">CircularPane</a>
+<ul class="sectlevel2">
+<li><a href="#_cornermenu">CornerMenu</a></li>
+<li><a href="#_circlepopupmenu">CirclePopupMenu</a></li>
+</ul>
+</li>
+<li><a href="#_binding">Binding</a>
+<ul class="sectlevel2">
+<li><a href="#_togglegroupvalue">ToggleGroupValue</a></li>
+<li><a href="#_listview">ListView</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
+<div id="content">
 <div class="sect1">
 <h2 id="_agenda">Agenda</h2>
 <div class="sectionbody">
@@ -481,10 +487,191 @@ ICalendarAgenda is an extension to Agenda, which picks up where Agenda stops in 
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_calendarpicker">CalendarPicker</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>JavaFX now has a default date picker control, but it is only available as a popup to a textfield.
+JFXtras' CalendarPicker (and related LocalDatePicker and LocalDateTimePicker) are stand alone controls, which can be put into forms directly.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/gallery/DatePicker.png" alt="DatePicker">
+</div>
+</div>
+<div class="paragraph">
+<p>Of course they also are used by the TextField equivalents (like CalendarTextField).
+Furthermore, the Calendar and LocalDateTime pickers allow for also selecting a time up to seconds, by combining the TimePicker control.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/gallery/DateTextField.png" alt="DateTextField">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_listspinner">ListSpinner</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Years before JavaFX got a spinner control, JFXtras had ListSpinner which is used to select year and month in the CalendarPicker.
+It is a simple control that selects the value in a list.
+Using CSS it is possible to determining where the arrows are placed and pointing, both horizontally and vertically.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/gallery/ListSpinner.png" alt="ListSpinner">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_layout">Layout</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The standard layout classes in JavaFX are somewhat strange, they work on the assumption that if a node can be part of multiple layouts, that they have the same constraints in all.
+The chance of that being the case is very unlikely, but it is still a big influence on how the API of the layout classes is designed.
+JFXtras offers an alternative API on the more popular layout implementations (drop-in replacements) that take a more conventional approach, and arguably more readable.</p>
+</div>
+<div class="sect2">
+<h3 id="_gridpane">GridPane</h3>
+<div class="paragraph">
+<p>Orginally one would add a control to a gridpane with the following code:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">Text t = new Text("text");
+gridPane.add(t, 1, 2, 2, 2));
+GridPane.setHAlignment(t, HPos.CENTER);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The issue is that a separate variable is required for the control, and what exactly is the row, column order again?
+Is the control in the code above placed in row and column 1 or 2?<br>
+JFXtras' alternative API looks like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">gridPane.add(new Text("text"), new GridPane.C()
+    .col(1).row(2)
+    .colSpan(2).rowSpan(2)
+    .halignment(HPos.CENTER));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Maybe not much more compact, but certainly more readable, and that is more important.<br>
+Similar API&#8217;s exists for other layouts.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_hbox_vbox">HBox, VBox</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">Button b = new Button("text");
+b.setMaxHeight(50.0);
+hbox.getChildren().add(b);
+HBox.setHgrow(b1, Priority.ALWAYS);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the code above a static method is used to set values in a node&#8217;s layout map, meaning that this will be applied in all layouts.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">hbox.add(new Button("text"), new HBox.C()
+    .maxHeight(50.0)
+    .hgrow(Priority.ALWAYS));</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_circularpane">CircularPane</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Beside new API&#8217;s for existing layouts, JFXtras also has a couple for new layouts.
+The first is the CircularPane, which lays out its children in a circle.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/gallery/CircularPane.png" alt="CircularPane">
+</div>
+</div>
+<div class="paragraph">
+<p>The animation on how the icons flow into place (or back), plus the arc on which they are shown, is configurable.
+Based on this layout there are a number of animated menu&#8217;s available, which demonstrate the placement and animation of CircularPane.</p>
+</div>
+<div class="sect2">
+<h3 id="_cornermenu">CornerMenu</h3>
+<div class="paragraph">
+<p>CornerMenu pops out from any of the four corners of a window, animating icons out over a 90 degree arc.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/gallery/CornerMenu.gif" alt="CornerMenu">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_circlepopupmenu">CirclePopupMenu</h3>
+<div class="paragraph">
+<p>CirclePopupMenu makes the icons of the menu appear where the right mouse button is clicked.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/gallery/CirclePopupMenu.gif" alt="CirclePopupMenu">
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_binding">Binding</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Some of the standard controls lack a practical binding feature.
+A good example of this is the ToggleGroup, which allows to synchronize multiple toggling controls (like ToggleButton or RadioButton) to be synced, so that only one toggle can be selected at a time.</p>
+</div>
+<div class="sect2">
+<h3 id="_togglegroupvalue">ToggleGroupValue</h3>
+<div class="paragraph">
+<p>But ToggleGroup lacks a way to associate the selected toggle with an actual value.
+For this JFXtras offers ToggleGroupValue, a drop-in extension to ToggleGroup.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">ToggleGroupValue&lt;String&gt; toggleGroupValue = new ToggleGroupValue&lt;&gt;();
+toggleGroupValue.add(new RadioButton("Animal that quacks"), "duck");
+toggleGroupValue.add(new RadioButton("Animal that barks"), "dog");
+toggleGroupValue.add(new RadioButton("Animal that roars"), "lion");
+...
+textField.textProperty().bindBidirectional(toggleGroupValue.valueProperty());</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The main difference is that when adding a toggle to ToggleGroupValue, the associated value is provides as well, and can be read, written or bound to.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_listview">ListView</h3>
+<div class="paragraph">
+<p>The drop-in replacement for ListView allows easy binding to the selected value.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">ListView&lt;String&gt; listView = new ListView&lt;String&gt;();
+...
+textField.textProperty().bindBidirectional(listView.selectedItemProperty());</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-04-23 10:58:19 CEST
+Last updated 2017-04-23 14:34:26 CEST
 </div>
 </div>
 </body>
