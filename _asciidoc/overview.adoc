@@ -1,0 +1,27 @@
+= JFXtras overview
+Tom Eugelink <tbee@tbee.org>
+:imagesdir: images
+:toc:
+:toc-placement: preamble
+
+image::jfxtras_logo1_white.png[]
+
+== Agenda
+Agenda is an implementation of a calendar component similar to Google Calendar. 
+
+image::gallery/Agenda.png[]
+
+Some attention points are:
+
+* Appointments can be dragged, resized, created and its properties can be edited via a popup window.
+* Appointments are part of groups, which dictates the color that is used.
+* Whole-day appointments, unlike those in Google calendar, have a visual presence on the whole day: a small vertical bar runs from the label at the top along the whole day, indicating that a whole-day appointment is in effect. This is called a 'flag pole'.
+
+A crucial aspect to grasp when using Agenda is that you (the user of the Agenda control) are in charge of populating the appointments list, Agenda just renders and manipulates them.
+ICalendarAgenda is an extension to Agenda, which picks up where Agenda stops in that it maintains this appointments list, by using the iCalendar standard to generate repeating appointments.
+
+image::gallery/ICalendarAgenda.png[]
+
+    
+
+

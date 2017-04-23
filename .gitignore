@@ -1,1 +1,4 @@
 resources/.DS_Store
+/_site
+/.project
+/.polyglot.pom.groovy
