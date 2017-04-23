@@ -64,7 +64,7 @@ gridPane.add(new Text("text"), new GridPane.C()
     .halignment(HPos.CENTER));
 ----
 
-Maybe not much more compact, but certainly more readable, and that is more important. +
+Maybe not much more compact, but certainly more readable. 
 Similar API's exists for other layouts.
 
 
@@ -106,10 +106,10 @@ CirclePopupMenu makes the icons of the menu appear where the right mouse button 
 image::gallery/CirclePopupMenu.gif[]
 
 == Binding
-Some of the standard controls lack a practical binding feature.
-A good example of this is the ToggleGroup, which allows to synchronize multiple toggling controls (like ToggleButton or RadioButton) to be synced, so that only one toggle can be selected at a time.
+Some of the standard controls lack a convenient binding feature.
 
 === ToggleGroupValue 
+A good example of this is the ToggleGroup, which allows to synchronize multiple toggling controls (like ToggleButton or RadioButton) to be synced, so that only one toggle can be selected at a time.
 But ToggleGroup lacks a way to associate the selected toggle with an actual value. 
 For this JFXtras offers ToggleGroupValue, a drop-in extension to ToggleGroup.
 
@@ -123,7 +123,7 @@ toggleGroupValue.add(new RadioButton("Animal that roars"), "lion");
 textField.textProperty().bindBidirectional(toggleGroupValue.valueProperty());
 ----
 
-The main difference is that when adding a toggle to ToggleGroupValue, the associated value is provides as well, and can be read, written or bound to.  
+The main difference is that when adding a toggle to ToggleGroupValue, the associated value needs to be provided as well, and can be read, written or bound to.  
 
 === ListView
 The drop-in replacement for ListView allows easy binding to the selected value.

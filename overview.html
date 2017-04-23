@@ -559,7 +559,7 @@ JFXtras' alternative API looks like this:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Maybe not much more compact, but certainly more readable, and that is more important.<br>
+<p>Maybe not much more compact, but certainly more readable.
 Similar API&#8217;s exists for other layouts.</p>
 </div>
 </div>
@@ -630,13 +630,13 @@ Based on this layout there are a number of animated menu&#8217;s available, whic
 <h2 id="_binding">Binding</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Some of the standard controls lack a practical binding feature.
-A good example of this is the ToggleGroup, which allows to synchronize multiple toggling controls (like ToggleButton or RadioButton) to be synced, so that only one toggle can be selected at a time.</p>
+<p>Some of the standard controls lack a convenient binding feature.</p>
 </div>
 <div class="sect2">
 <h3 id="_togglegroupvalue">ToggleGroupValue</h3>
 <div class="paragraph">
-<p>But ToggleGroup lacks a way to associate the selected toggle with an actual value.
+<p>A good example of this is the ToggleGroup, which allows to synchronize multiple toggling controls (like ToggleButton or RadioButton) to be synced, so that only one toggle can be selected at a time.
+But ToggleGroup lacks a way to associate the selected toggle with an actual value.
 For this JFXtras offers ToggleGroupValue, a drop-in extension to ToggleGroup.</p>
 </div>
 <div class="listingblock">
@@ -650,7 +650,7 @@ textField.textProperty().bindBidirectional(toggleGroupValue.valueProperty());</c
 </div>
 </div>
 <div class="paragraph">
-<p>The main difference is that when adding a toggle to ToggleGroupValue, the associated value is provides as well, and can be read, written or bound to.</p>
+<p>The main difference is that when adding a toggle to ToggleGroupValue, the associated value needs to be provided as well, and can be read, written or bound to.</p>
 </div>
 </div>
 <div class="sect2">
@@ -671,7 +671,7 @@ textField.textProperty().bindBidirectional(listView.selectedItemProperty());</co
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-04-23 14:34:26 CEST
+Last updated 2017-04-23 14:43:55 CEST
 </div>
 </div>
 </body>
