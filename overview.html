@@ -446,6 +446,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_listview">ListView</a></li>
 </ul>
 </li>
+<li><a href="#_gauges">Gauges</a>
+<ul class="sectlevel2">
+<li><a href="#_metroarc">MetroArc</a></li>
+<li><a href="#_basicrounddial">BasicRoundDial</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -502,7 +508,7 @@ JFXtras' CalendarPicker (and related LocalDatePicker and LocalDateTimePicker) ar
 </div>
 <div class="paragraph">
 <p>Of course they also are used by the TextField equivalents (like CalendarTextField).
-Furthermore, the Calendar and LocalDateTime pickers allow for also selecting a time up to seconds, by combining the TimePicker control.</p>
+Furthermore, the Calendar and LocalDateTime pickers also allow selecting a time up to seconds, by combining the TimePicker control.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -591,7 +597,7 @@ HBox.setHgrow(b1, Priority.ALWAYS);</code></pre>
 <h2 id="_circularpane">CircularPane</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Beside new API&#8217;s for existing layouts, JFXtras also has a couple for new layouts.
+<p>Beside new API&#8217;s for existing layouts, JFXtras also has a couple of new layouts.
 The first is the CircularPane, which lays out its children in a circle.</p>
 </div>
 <div class="imageblock">
@@ -649,8 +655,8 @@ The application can render itself in a grid form:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>When this decision is made, is configured.
-The logic behind it all, including DPI scaling, is what ResponsivePane handles.</p>
+<p>When this switch is made, is configurable.
+The logic behind it, including DPI scaling, is what ResponsivePane handles.</p>
 </div>
 </div>
 </div>
@@ -696,10 +702,40 @@ textField.textProperty().bindBidirectional(listView.selectedItemProperty());</co
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_gauges">Gauges</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Once upon a time Gerrit Grunwald had created a number of great looking gauges, which he used primarily in his presentations.
+That was the reason tThe gauge were not deemed production quality, so with his permission we implemented a few in JFXtras.</p>
+</div>
+<div class="sect2">
+<h3 id="_metroarc">MetroArc</h3>
+<div class="imageblock">
+<div class="content">
+<img src="images/gallery/metroArcGauge.gif" alt="metroArcGauge">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_basicrounddial">BasicRoundDial</h3>
+<div class="imageblock">
+<div class="content">
+<img src="images/gallery/basicRoundDialGauge.gif" alt="basicRoundDialGauge">
+</div>
+</div>
+<div class="paragraph">
+<p>Shortly thereafter Gerrit found inspiration and decided to publish them in a more stable form himself, resulting in the <a href="https://github.com/HanSolo/Medusa">Medusa</a> library.
+The API of the gauges between the two libraries are totally different (and it is interesting to see how the same thing can be approached from different angles); JFXtras uses a functional API, with rendering details through CSS, Medusa has the rendering exposed in the API.
+The JFXtras gauges have some visual differences from their Medusa counterparts, for example in supporting more indicators. Medusa by now features many more gauges.</p>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-04-23 20:41:51 CEST
+Last updated 2017-04-27 16:25:13 CEST
 </div>
 </div>
 </body>

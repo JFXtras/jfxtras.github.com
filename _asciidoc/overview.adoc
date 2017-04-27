@@ -26,7 +26,7 @@ JFXtras' CalendarPicker (and related LocalDatePicker and LocalDateTimePicker) ar
 image::gallery/DatePicker.png[]
 
 Of course they also are used by the TextField equivalents (like CalendarTextField).
-Furthermore, the Calendar and LocalDateTime pickers allow for also selecting a time up to seconds, by combining the TimePicker control.
+Furthermore, the Calendar and LocalDateTime pickers also allow selecting a time up to seconds, by combining the TimePicker control.
 
 image::gallery/DateTextField.png[]
 
@@ -87,7 +87,7 @@ hbox.add(new Button("text"), new HBox.C()
 ----
 
 == CircularPane
-Beside new API's for existing layouts, JFXtras also has a couple for new layouts. 
+Beside new API's for existing layouts, JFXtras also has a couple of new layouts. 
 The first is the CircularPane, which lays out its children in a circle.
 
 image::gallery/CircularPane.png[]
@@ -148,3 +148,17 @@ ListView<String> listView = new ListView<String>();
 ...
 textField.textProperty().bindBidirectional(listView.selectedItemProperty());
 ----
+
+== Gauges
+Once upon a time Gerrit Grunwald had created a number of great looking gauges, which he used primarily in his presentations.
+That was the reason tThe gauge were not deemed production quality, so with his permission we implemented a few in JFXtras.
+
+=== MetroArc
+image::gallery/metroArcGauge.gif[]
+
+=== BasicRoundDial
+image::gallery/basicRoundDialGauge.gif[]
+
+Shortly thereafter Gerrit found inspiration and decided to publish them in a more stable form himself, resulting in the https://github.com/HanSolo/Medusa[Medusa] library.
+The API of the gauges between the two libraries are totally different (and it is interesting to see how the same thing can be approached from different angles); JFXtras uses a functional API, with rendering details through CSS, Medusa has the rendering exposed in the API. 
+The JFXtras gauges have some visual differences from their Medusa counterparts, for example in supporting more indicators. Medusa by now features many more gauges.
