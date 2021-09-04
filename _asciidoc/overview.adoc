@@ -151,7 +151,7 @@ textField.textProperty().bindBidirectional(listView.selectedItemProperty());
 
 == Gauges
 Once upon a time Gerrit Grunwald had created a number of great looking gauges, which he used primarily in his presentations.
-That was the reason tThe gauge were not deemed production quality, so with his permission we implemented a few in JFXtras.
+That was the reason the gauges were not deemed production quality, so with his permission we implemented a few in JFXtras.
 
 === MetroArc
 image::gallery/metroArcGauge.gif[]
